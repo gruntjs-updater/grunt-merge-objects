@@ -26,10 +26,10 @@ In your project's Gruntfile, add a section named `merge_objects` to the data obj
 grunt.initConfig({
   merge_objects: {
     options: {
-      // Task-specific options go here.
+      // functionName: 'define' // Only option and its default value.
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    files: {
+      // List of files that should be merged, in the order of precedence. Later files override properties in earlier files.
     },
   },
 });
