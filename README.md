@@ -1,6 +1,6 @@
 # grunt-merge-objects
 
-> Merges two files each with a JS multi-level key/value structure. Latter one overrides and extends the first ne.
+> Merges two files each with a hierarchical JS key/value object structure. The plugin is specially adapted to object literals specified through AMD define({}). First file is the base object, and subsequent files overrides and extends the base. 
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
