@@ -24,11 +24,15 @@ module.exports = function (grunt) {
     }
     
     function isObject(o) {
-        return getType(o) === 'Object' && !(o instanceof RegExp);
+        return getType(o) === 'Object' && !isRegExp(o);
+    }
+    
+    function isRegExp(val) {
+        return val && val.constructor && val.constructor.name === "RegExp";
     }
 
     function sanitize(value) {
-        if (value && value.constructor && value.constructor.name === "RegExp") {
+        if (isRegExp(value)) {
             return value.toString();
         } else {
             return value;
