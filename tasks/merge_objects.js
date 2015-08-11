@@ -88,7 +88,7 @@ module.exports = function (grunt) {
             });
 
             // Write the destination file.
-            var prettyResult = JSON.stringify(result, null, 2).replace(/(")(.*)(")\:/g,'$2:').replace(/([^\\"])(")/g, "$1'");
+            var prettyResult = JSON.stringify(result, null, 2).replace(/(")([A-Za-z0-9_]*)(")\:/g,'$2:').replace(/([^\\"])(")/g, "$1'");
             
             grunt.file.write(f.dest, options.functionName + options.startWrap + prettyResult + options.endWrap);
 
