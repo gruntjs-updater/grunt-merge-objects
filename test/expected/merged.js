@@ -7,6 +7,7 @@ define({
       prop6: 'value66'
     },
     prop10: 'value10',
+    prop21: '/(\")([A-Za-z0-9_]*)(\"):/g',
     prop7: {
       prop8: 'value8',
       prop9: 'val\"ue9'

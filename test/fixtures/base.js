@@ -6,6 +6,7 @@ define({
             prop5: 'value5',
             prop6: 'value6'
         },
-        prop10: 'value10'
+        prop10: 'value10',
+        prop21: /(")([A-Za-z0-9_]*)("):/g
     }
 });

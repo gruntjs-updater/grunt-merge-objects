@@ -24,15 +24,24 @@ module.exports = function (grunt) {
     }
     
     function isObject(o) {
-        return getType(o) === 'Object';
+        return getType(o) === 'Object' && !(o instanceof RegExp);
     }
 
+    function sanitize(value) {
+        if (value && value.constructor && value.constructor.name === "RegExp") {
+            return value.toString();
+        } else {
+            return value;
+        }
+    }
+    
+    
     function combine(base, extension, recursive) {
         var copy = {};
         if (base) {
             for (var prop in base) {
                 if (base.hasOwnProperty(prop)) {
-                    copy[prop] = base[prop];
+                    copy[prop] = sanitize(base[prop]);
                 }
             }
         }
@@ -42,8 +51,7 @@ module.exports = function (grunt) {
                     if (recursive && isObject(base[prop2]) && isObject(extension[prop2])) {
                         copy[prop2] = combine(base[prop2], extension[prop2], recursive);
                     } else {
-                        //grunt.log.warn('Is not object: ' + getType(base[prop2]));
-                        copy[prop2] = extension[prop2];
+                        copy[prop2] = sanitize(extension[prop2]);
                     }
                 }
             }
