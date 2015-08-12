@@ -32,7 +32,15 @@ module.exports = function (grunt) {
     }
 
     function sanitize(value) {
-        if (isRegExp(value)) {
+        if (isObject(value)) {
+            var copy = {};
+            Object.getOwnPropertyNames(value).forEach(function(prop) {
+                if (value.hasOwnProperty(prop)) {
+                    copy[prop] = sanitize(value[prop]);
+                }
+            });
+            return copy;
+        } else if (isRegExp(value)) {
             return value.toString();
         } else {
             return value;
@@ -40,7 +48,7 @@ module.exports = function (grunt) {
     }
     
     
-    function combine(base, extension, recursive) {
+    function combine(base, extension) {
         var copy = {};
         if (base) {
             for (var prop in base) {
@@ -52,8 +60,8 @@ module.exports = function (grunt) {
         if (extension) {
             for (var prop2 in extension) {
                 if (extension.hasOwnProperty(prop2)) {
-                    if (recursive && isObject(base[prop2]) && isObject(extension[prop2])) {
-                        copy[prop2] = combine(base[prop2], extension[prop2], recursive);
+                    if (isObject(base[prop2]) && isObject(extension[prop2])) {
+                        copy[prop2] = combine(base[prop2], extension[prop2]);
                     } else {
                         copy[prop2] = sanitize(extension[prop2]);
                     }
@@ -96,7 +104,7 @@ module.exports = function (grunt) {
             });
 
             var result = contents.reduce(function(base, ext) {
-                return combine(base, ext, true);
+                return combine(base, ext);
             });
 
             // Write the destination file.

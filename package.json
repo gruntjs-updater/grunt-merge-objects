@@ -1,7 +1,7 @@
 {
   "name": "grunt-merge-objects",
   "description": "Combines AMD files recursively defining key/value structures like define({ someKey: 'someValue1}). First file is base, subsequient files overrides earlier properties.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "homepage": "https://github.com/torerikal/grunt-merge-objects",
   "author": {
     "name": "Tor Erik Alræk",
